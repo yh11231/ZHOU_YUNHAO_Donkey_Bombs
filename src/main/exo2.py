@@ -26,7 +26,7 @@ from pystk2_gymnasium.envs import STKRaceMultiEnv, AgentSpec
 from pystk2_gymnasium.definitions import CameraMode
 
 MAX_TEAMS = 1 # nombre max de team sur l'écran
-MAX_STEPS = 200 # nombre de bas
+MAX_STEPS = 1000 # nombre de bas
 NB_RACES = 1
 
 # Get the current timestamp
@@ -141,7 +141,7 @@ def single_race(env, agents, names, scores):
                 print(f"{names[i]} has finished race !")
                 nb_finished += 1
                 agents[i].isEnd = True
-        print("race duration:", steps) #on affiche les nb de bas 
+         
 
         obs, _, _, _, info = env.step(actions)
 
