@@ -25,8 +25,8 @@ from agents.team7.agent7 import Agent7
 from pystk2_gymnasium.envs import STKRaceMultiEnv, AgentSpec
 from pystk2_gymnasium.definitions import CameraMode
 
-MAX_TEAMS = 7
-MAX_STEPS = 1000
+MAX_TEAMS = 1 # nombre max de team sur l'écran
+MAX_STEPS = 200 # nombre de bas
 NB_RACES = 1
 
 # Get the current timestamp
@@ -86,7 +86,7 @@ AgentSpec.__hash__ = agent_spec_hash
 
 # Create agents specifications.
 agents_specs = [
-    AgentSpec(name=f"Team{i+1}", rank_start=i, use_ai=False, camera_mode=CameraMode.ON) for i in range(MAX_TEAMS)
+    AgentSpec(name=f"Team{7}", rank_start=i, use_ai=False, camera_mode=CameraMode.ON) for i in range(MAX_TEAMS)
 ]
 
 def create_race():
@@ -100,15 +100,15 @@ def create_race():
 
     agents = []
     names = []
-
-    agents.append(Agent1(env, path_lookahead=3))
-    agents.append(Agent2(env, path_lookahead=3))
-    agents.append(Agent3(env, path_lookahead=3))
-    agents.append(Agent4(env, path_lookahead=3))
-    agents.append(Agent5(env, path_lookahead=3))
-    agents.append(Agent6(env, path_lookahead=3))
+    #metrre les autre agent en commentaire pour qu'on affiche seulement notre agent7
+    #agents.append(Agent1(env, path_lookahead=3))
+    #agents.append(Agent2(env, path_lookahead=3))
+    #agents.append(Agent3(env, path_lookahead=3))
+    #agents.append(Agent4(env, path_lookahead=3))
+    #agents.append(Agent5(env, path_lookahead=3))
+    #agents.append(Agent6(env, path_lookahead=3))
     agents.append(Agent7(env, path_lookahead=3))
-    np.random.shuffle(agents)
+    #np.random.shuffle(agents)
 
     for i in range(MAX_TEAMS):
         names.append(agents[i].name)
@@ -141,6 +141,7 @@ def single_race(env, agents, names, scores):
                 print(f"{names[i]} has finished race !")
                 nb_finished += 1
                 agents[i].isEnd = True
+        print("race duration:", steps) #on affiche les nb de bas 
 
         obs, _, _, _, info = env.step(actions)
 
