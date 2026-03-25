@@ -13,16 +13,28 @@ class Agent7(KartAgent):
         self.isEnd = False
         self.name = "ZHOU_YUNHAO" # replace with your chosen name
 
+        self.cmp = 0 #compteur
     def reset(self):
         self.obs, _ = self.env.reset()
         self.agent_positions = []
+        self.cmp = 0 #compteur
+        
 
     def endOfTrack(self):
         return self.isEnd
 
     def choose_action(self, obs):
-        acceleration = random.random()
-        steering = random.random()
+        print("race duration:", self.cmp) #afficher nb de pas
+        
+        if (self.cmp < 200): # sinb pas inferieur ou egale à 200 
+            acceleration = 1 
+            steering = 0
+            self.cmp = self.cmp + 1 #compteur + 1
+        else:                   #sinon
+            acceleration = 0    
+            steering = 0
+        
+
         action = {
             "acceleration": acceleration,
             "steer": steering,
